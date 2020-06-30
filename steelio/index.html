@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Rafael de Oliveira Calcada">
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Input and Output Signals - Steel Core Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Input and Output Signals";
+    var mkdocs_page_input_path = "steelio.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Steel Core Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Overview</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../getting/">Getting Started</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../uarch/">Microarchitecture</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Input and Output Signals</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#interrupt-controller-interface">Interrupt controller interface</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#instruction-fetch-interface">Instruction fetch interface</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#data-readwrite-interface">Data read/write interface</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#real-time-counter-interface">Real-time counter interface</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#clk-and-reset-signals">CLK and RESET signals</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../timing/">Timing Diagrams</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../traps/">Exceptions and Interrupts</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../details/">Implementation Details</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Steel Core Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Input and Output Signals</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/rafaelcalcada/steel-core/edit/master/docs/steelio.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="input-and-output-signals">Input and Output Signals</h1>
+<p>The figure below shows Steel input and output signals (except CLK and RESET). The following sections explain their functions in detail. </p>
+<p>The interfaces to fetch instructions and to read/write data can be connected to any type of memory, but were designed to facilitate integration with Block RAMs in FPGAs.</p>
+<p><img alt="Steel IO" src="../images/steel-interface.png" /></p>
+<h2 id="interrupt-controller-interface">Interrupt controller interface</h2>
+<p>The interrupt controller interface has three signals used to request external, timer and software interrupts, shown in the table below. The interrupt request process is explained in the sections <a href="../traps/">Exceptions and Interrupts</a> and <a href="../timing/#interrupt-request">Timing Diagrams / Interrupt Request</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Signal</strong></th>
+<th align="left"><strong>Width</strong></th>
+<th align="left"><strong>Direction</strong></th>
+<th align="left"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><em>E_IRQ</em></td>
+<td align="left">1 bit</td>
+<td align="left">Input</td>
+<td align="left">When set high indicates an external interrupt request.</td>
+</tr>
+<tr>
+<td align="left"><em>T_IRQ</em></td>
+<td align="left">1 bit</td>
+<td align="left">Input</td>
+<td align="left">When set high indicates a timer interrupt request.</td>
+</tr>
+<tr>
+<td align="left"><em>S_IRQ</em></td>
+<td align="left">1 bit</td>
+<td align="left">Input</td>
+<td align="left">When set high indicates a software interrupt request.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="instruction-fetch-interface">Instruction fetch interface</h2>
+<p>The instruction fetch interface has two signals used in the instruction fetch process, shown in the table below. The process of fetching instructions is explained in the section <a href="../timing/#instruction-fetch">Timing Diagrams / Instruction Fetch</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Signal</strong></th>
+<th align="left"><strong>Width</strong></th>
+<th align="left"><strong>Direction</strong></th>
+<th align="left"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><em>INSTR</em></td>
+<td align="left">32 bits</td>
+<td align="left">Input</td>
+<td align="left">Contains the instruction fetched from memory.</td>
+</tr>
+<tr>
+<td align="left"><em>I_ADDR</em></td>
+<td align="left">32 bits</td>
+<td align="left">Output</td>
+<td align="left">Contains the address of the instruction the core wants to fetch from memory.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-readwrite-interface">Data read/write interface</h2>
+<p>The data read/write interface has five signals used in the process of reading/writing data from/to memory. The signals are shown in the table below. The process of fetching data from memory is explained in the section <a href="../timing/#data-fetch">Timing Diagrams / Data fetch</a>. The process of writing data is explained in the section <a href="../timing/#data-writing">Timing Diagrams / Data writing</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Signal</strong></th>
+<th align="left"><strong>Width</strong></th>
+<th align="left"><strong>Direction</strong></th>
+<th align="left"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><em>DATA_IN</em></td>
+<td align="left">32 bits</td>
+<td align="left">Input</td>
+<td align="left">Contains the data fetched from memory.</td>
+</tr>
+<tr>
+<td align="left"><em>D_ADDR</em></td>
+<td align="left">32 bits</td>
+<td align="left">Output</td>
+<td align="left">In a write operation, contains the address of the memory position where the data will be stored. In a read operation, contains the address of the memory position where the data to be fetched is. The address is always aligned on a four byte boundary (the last two bits are always zero).</td>
+</tr>
+<tr>
+<td align="left"><em>DATA_OUT</em></td>
+<td align="left">32 bits</td>
+<td align="left">Output</td>
+<td align="left">Contains the data to be stored in memory. Used only with write operations.</td>
+</tr>
+<tr>
+<td align="left"><em>WR_REQ</em></td>
+<td align="left">1 bit</td>
+<td align="left">Output</td>
+<td align="left">When high, indicates a request to write data. Used only with write operations.</td>
+</tr>
+<tr>
+<td align="left"><em>WR_MASK</em></td>
+<td align="left">4 bits</td>
+<td align="left">Output</td>
+<td align="left">Contains a mask of four <em>byte-write enable</em> bits. A bit high indicates that the corresponding byte must be written. Used only with write operations.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="real-time-counter-interface">Real-time counter interface</h2>
+<p>The real time counter interface has just one signal used to update the <code>time</code> CSR, shown in the table below. The process of updating the <code>time</code> register is explained in the section <a href="../timing/#time-csr-update">Timing Diagrams / time CSR update</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Signal</strong></th>
+<th align="left"><strong>Width</strong></th>
+<th align="left"><strong>Direction</strong></th>
+<th align="left"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><em>REAL_TIME</em></td>
+<td align="left">64 bits</td>
+<td align="left">Input</td>
+<td align="left">Contains the current value read from a real time counter.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="clk-and-reset-signals">CLK and RESET signals</h2>
+<p>The core also has the <code>CLK</code> and <code>RESET</code> input signals, which are not shown in the figure above. The <code>CLK</code> signal must be connected to a clock source. The <code>RESET</code> signal is active high and resets the core asynchronously.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../timing/" class="btn btn-neutral float-right" title="Timing Diagrams">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../config/" class="btn btn-neutral" title="Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/rafaelcalcada/steel-core/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../config/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../timing/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
