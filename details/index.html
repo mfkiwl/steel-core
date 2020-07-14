@@ -83,7 +83,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#control-unit">Control Unit</a>
+    <li class="toctree-l3"><a class="reference internal" href="#decoder">Decoder</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#alu">ALU</a>
     </li>
@@ -236,10 +236,10 @@
 </tbody>
 </table>
 <h2 id="modules">Modules</h2>
-<h3 id="control-unit">Control Unit</h3>
-<p>The Control Unit (<strong>control_unit.v</strong>) decodes the instruction and generates the signals that control the memory, the Load Unit, the Store Unit, the ALU, the two register files (Integer and CSR), the Immediate Generator and the Writeback Multiplexer. The description of its input and output signals are shown in table 2, below.</p>
+<h3 id="decoder">Decoder</h3>
+<p>The Decoder (<strong>decoder.v</strong>) decodes the instruction and generates the signals that control the memory, the Load Unit, the Store Unit, the ALU, the two register files (Integer and CSR), the Immediate Generator and the Writeback Multiplexer. The description of its input and output signals are shown in table 2, below.</p>
 <p align=left>
-<strong>Table 2.</strong> Branch Unit input/output signals
+<strong>Table 2.</strong> Decoder input/output signals
 </p>
 
 <table>
