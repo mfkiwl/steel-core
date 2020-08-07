@@ -122,11 +122,11 @@
             <div class="section">
               
                 <h1 id="configuration">Configuration</h1>
-<p>Steel configuration parameters can be modified by editing the <code>globals.vh</code> file (located inside the <code>rtl</code> directory). The following subsections describe the parameters that can be changed.</p>
+<p>Steel configuration parameters can be modified by editing the <strong>globals.vh</strong> file (located inside the <strong>rtl</strong> directory). The following subsections describe the parameters that can be changed and its default values.</p>
 <h2 id="boot-address">Boot address</h2>
-<p>The <code>BOOT_ADDRESS</code> parameter sets the memory position of the first instruction the core will fetch after reset. It can be changed to any 32-bit value.</p>
+<p>The <strong>BOOT_ADDRESS</strong> parameter sets the memory position of the first instruction the core will fetch after reset. It can be changed to any 32-bit value. Its default value is <strong>0x00000000</strong>.</p>
 <h2 id="csrs-reset-values">CSRs reset values</h2>
-<p>The reset value of several control and status registers (CSRs) can be modified. The table below shows these CSRs and the accepted values.</p>
+<p>The reset value of some control and status records (CSRs) can be modified. The table below shows these CSRs and accepted values. The default value for all of them is <strong>zero</strong>.</p>
 <table>
 <thead>
 <tr>
@@ -137,43 +137,43 @@
 <tbody>
 <tr>
 <td align="left"><em>MCYCLE_RESET</em></td>
-<td align="left">Value of the <code>mcycle</code>  CSR after reset. It can be changed to any 32-bit value.</td>
+<td align="left">Value of the <strong>mcycle</strong>  CSR after reset. It can be changed to any 32-bit value.</td>
 </tr>
 <tr>
 <td align="left"><em>MCYCLEH_RESET</em></td>
-<td align="left">Value of the <code>mcycleh</code> CSR after reset. It can be changed to any 32-bit value.</td>
+<td align="left">Value of the <strong>mcycleh</strong> CSR after reset. It can be changed to any 32-bit value.</td>
 </tr>
 <tr>
 <td align="left"><em>TIME_RESET</em></td>
-<td align="left">Value of the <code>time</code> CSR after reset. It can be changed to any 32-bit value.</td>
+<td align="left">Value of the <strong>time</strong> CSR after reset. It can be changed to any 32-bit value.</td>
 </tr>
 <tr>
 <td align="left"><em>TIMEH_RESET</em></td>
-<td align="left">Value of the <code>timeh</code> CSR after reset. It can be changed to any 32-bit value.</td>
+<td align="left">Value of the <strong>timeh</strong> CSR after reset. It can be changed to any 32-bit value.</td>
 </tr>
 <tr>
 <td align="left"><em>MINSTRET_RESET</em></td>
-<td align="left">Value of the <code>minstret</code> CSR after reset. It can be changed to any 32-bit value.</td>
+<td align="left">Value of the <strong>minstret</strong> CSR after reset. It can be changed to any 32-bit value.</td>
 </tr>
 <tr>
 <td align="left"><em>MINSTRETH_RESET</em></td>
-<td align="left">Value of the <code>minstreth</code> CSR after reset. It can be changed to any 32-bit value.</td>
+<td align="left">Value of the <strong>minstreth</strong> CSR after reset. It can be changed to any 32-bit value.</td>
 </tr>
 <tr>
 <td align="left"><em>MTVEC_BASE_RESET</em></td>
-<td align="left">Value of the <code>base</code> field of <code>mtvec</code> CSR after reset. The value is used in the trap handler address calculation. It can be changed to any 30-bit value.</td>
+<td align="left">Value of the <strong>base</strong> field of <strong>mtvec</strong> CSR after reset. The value is used in the trap handler address calculation. It can be changed to any 30-bit value.</td>
 </tr>
 <tr>
 <td align="left"><em>MTVEC_MODE_RESET</em></td>
-<td align="left">Value of the <code>mode</code> field of <code>mtvec</code> CSR after reset. It defines the interrupt mode and can be changed to the value 00 (direct mode) or 01 (vectored mode).</td>
+<td align="left">Value of the <strong>mode</strong> field of <strong>mtvec</strong> CSR after reset. It defines the interrupt mode and can be changed to the value 00 (direct mode) or 01 (vectored mode).</td>
 </tr>
 <tr>
 <td align="left"><em>MSCRATCH_RESET</em></td>
-<td align="left">Value of the <code>mscratch</code> CSR after reset. It can be changed to any 32-bit value.</td>
+<td align="left">Value of the <strong>mscratch</strong> CSR after reset. It can be changed to any 32-bit value.</td>
 </tr>
 <tr>
 <td align="left"><em>MEPC_RESET</em></td>
-<td align="left">Value of the <code>mepc</code> CSR after reset. It can be changed to any 32-bit address aligned on a four byte boundary (the last two bits must be set to zero).</td>
+<td align="left">Value of the <strong>mepc</strong> CSR after reset. It can be changed to any 32-bit address aligned on a four byte boundary (the last two bits must be set to zero).</td>
 </tr>
 <tr>
 <td align="left"><em>MCOUNTINHIBIT_CY_RESET</em></td>

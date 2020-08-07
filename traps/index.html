@@ -126,13 +126,13 @@
                 <h1 id="exceptions-and-interrupts">Exceptions and Interrupts</h1>
 <h2 id="supported-exceptions-and-interrupts">Supported exceptions and interrupts</h2>
 <p>Steel supports the exceptions and interrupts shown in the table below. They are listed in descending priority order (the highest priority is at the top of the table). If two or more exceptions/interrupts occur at the same time, the one with the highest priority is taken.</p>
-<p>Exceptions always cause a trap to be taken. An interrupt will cause a trap only if enabled. Each type of interrupt has an interrupt-enable bit in the <code>mie</code> register. Interrupts are globally enable/disabled by setting the MIE bit of <code>mstatus</code> register.</p>
+<p>Exceptions always cause a trap to be taken. An interrupt will cause a trap only if enabled. Each type of interrupt has an interrupt-enable bit in the <strong>mie</strong> register. Interrupts are globally enable/disabled by setting the MIE bit of <strong>mstatus</strong> register.</p>
 <table>
 <thead>
 <tr>
 <th align="left"><strong>Exception / Interrupt</strong></th>
-<th align="right"><code>mcause</code> <strong>interrupt bit</strong></th>
-<th align="right"><code>mcause</code> <strong>exception code</strong></th>
+<th align="right"><strong><em>mcause</em></strong> <strong>interrupt bit</strong></th>
+<th align="right"><strong><em>mcause</em></strong> <strong>exception code</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -184,21 +184,25 @@
 </tbody>
 </table>
 <h2 id="trap-handling-in-steel">Trap handling in Steel</h2>
-<p>Exceptions and interrupts are handled by a trap handler routine stored in memory (your software must provide one). The address of the trap handler first instruction is configured using the <code>mtvec</code> register. Steel supports both direct and vectorized interrupt modes. More information on interrupt modes and configuration of the <code>mtvec</code> register can be found in <a href="https://riscv.org/specifications/">RISC-V specifications</a>.</p>
+<p>Exceptions and interrupts are handled by a trap handler routine stored in memory (your software must provide one). The address of the trap handler first instruction is configured using the <strong>mtvec</strong> register. Steel supports both direct and vectorized interrupt modes. More information on interrupt modes and configuration of the <strong>mtvec</strong> register can be found in <a href="https://riscv.org/specifications/">RISC-V specifications</a>.</p>
 <p>When a trap is taken, the core proceeds as follows:</p>
 <ul>
-<li>the address of the interrupted instruction (or the instruction that encountered the exception) is saved in the <code>mepc</code> register;</li>
-<li>the value of the <code>mtval</code> register is set to zero;</li>
-<li>the value of the <code>mstatus</code> MIE bit is saved in the MPIE field and then set to zero;</li>
+<li>the address of the interrupted instruction (or the instruction that encountered the exception) is saved in the <strong>mepc</strong> register;</li>
+<li>the value of the <strong>mtval</strong> register is set to:<ul>
+<li>the misaligned address that caused the exception for all types of address-misaligned exceptions, or</li>
+<li>zero otherwise;</li>
+</ul>
+</li>
+<li>the value of the <strong>mstatus</strong> MIE bit is saved in the MPIE field and then set to zero;</li>
 <li>the program counter is set to the address of the trap handler first instruction.</li>
 </ul>
 <p>The <strong>mret</strong> instruction is used to return from traps. When executed, the core proceeds as follows:</p>
 <ul>
-<li>the value of the <code>mstatus</code> MPIE bit is saved in the MIE field and then set to one;</li>
-<li>the program counter is set to the value of <code>mepc</code> register.</li>
+<li>the value of the <strong>mstatus</strong> MPIE bit is saved in the MIE field and then set to one;</li>
+<li>the program counter is set to the value of <strong>mepc</strong> register.</li>
 </ul>
 <h2 id="nested-interrupts-capability">Nested interrupts capability</h2>
-<p>The core globally disables new interrupts when takes into a trap. The trap handler can re-enable interrupts by setting the <code>mstatus</code> MIE bit to one, thus enabling nested interrupts. To return from nested traps, the trap handler must stack and manage the values of the <code>mepc</code> register in memory.</p>
+<p>The core globally disables new interrupts when takes into a trap. The trap handler can re-enable interrupts by setting the <strong>mstatus</strong> MIE bit to one, thus enabling nested interrupts. To return from nested traps, the trap handler must stack and manage the values of the <strong>mepc</strong> register in memory.</p>
               
             </div>
           </div>

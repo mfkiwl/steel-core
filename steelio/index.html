@@ -128,11 +128,11 @@
             <div class="section">
               
                 <h1 id="input-and-output-signals">Input and Output Signals</h1>
-<p>The figure below shows Steel input and output signals (except CLK and RESET). The following sections explain their functions in detail. </p>
-<p>The interfaces to fetch instructions and to read/write data can be connected to any type of memory, but were designed to facilitate integration with Block RAMs in FPGAs.</p>
+<p>The figure below shows Steel input and output signals (except <strong>CLK</strong> and <strong>RESET</strong>). The following sections explain their functions in detail. </p>
+<p>The interfaces to fetch instructions and to read/write data can be connected to any type of memory, but were designed to facilitate integration with FPGAs Block RAMs and memory arrays.</p>
 <p><img alt="Steel IO" src="../images/steel-interface.png" /></p>
 <h2 id="interrupt-controller-interface">Interrupt controller interface</h2>
-<p>The interrupt controller interface has three signals used to request external, timer and software interrupts, shown in the table below. The interrupt request process is explained in the sections <a href="../traps/">Exceptions and Interrupts</a> and <a href="../timing/#interrupt-request">Timing Diagrams / Interrupt Request</a>.</p>
+<p>The interrupt controller interface has three signals used to request external, timer and software interrupts, shown in the table below. The interrupt request process is explained in the sections <a href="../traps/">Exceptions and Interrupts</a> and <a href="../timing/#interrupt-request">Interrupt Request</a>.</p>
 <table>
 <thead>
 <tr>
@@ -164,7 +164,7 @@
 </tbody>
 </table>
 <h2 id="instruction-fetch-interface">Instruction fetch interface</h2>
-<p>The instruction fetch interface has two signals used in the instruction fetch process, shown in the table below. The process of fetching instructions is explained in the section <a href="../timing/#instruction-fetch">Timing Diagrams / Instruction Fetch</a>.</p>
+<p>The instruction fetch interface has two signals used in the instruction fetch process, shown in the table below. The process of fetching instructions is explained in the section <a href="../timing/#instruction-fetch">Instruction Fetch</a>.</p>
 <table>
 <thead>
 <tr>
@@ -190,7 +190,7 @@
 </tbody>
 </table>
 <h2 id="data-readwrite-interface">Data read/write interface</h2>
-<p>The data read/write interface has five signals used in the process of reading/writing data from/to memory. The signals are shown in the table below. The process of fetching data from memory is explained in the section <a href="../timing/#data-fetch">Timing Diagrams / Data fetch</a>. The process of writing data is explained in the section <a href="../timing/#data-writing">Timing Diagrams / Data writing</a>.</p>
+<p>The data read/write interface has five signals used in the process of reading/writing data from/to memory. The signals are shown in the table below. The process of fetching data from memory is explained in the section <a href="../timing/#data-fetch">Data Fetch</a>. The process of writing data is explained in the section <a href="../timing/#data-writing">Data Writing</a>.</p>
 <table>
 <thead>
 <tr>
@@ -234,7 +234,7 @@
 </tbody>
 </table>
 <h2 id="real-time-counter-interface">Real-time counter interface</h2>
-<p>The real time counter interface has just one signal used to update the <code>time</code> CSR, shown in the table below. The process of updating the <code>time</code> register is explained in the section <a href="../timing/#time-csr-update">Timing Diagrams / time CSR update</a>.</p>
+<p>The real time counter interface has just one signal used to update the <strong>time</strong> CSR, shown in the table below. The process of updating the <strong>time</strong> register is explained in the section <a href="../timing/#time-csr-update">Time CSR update</a>.</p>
 <table>
 <thead>
 <tr>
@@ -254,7 +254,7 @@
 </tbody>
 </table>
 <h2 id="clk-and-reset-signals">CLK and RESET signals</h2>
-<p>The core also has the <code>CLK</code> and <code>RESET</code> input signals, which are not shown in the figure above. The <code>CLK</code> signal must be connected to a clock source. The <code>RESET</code> signal is active high and resets the core asynchronously.</p>
+<p>The core also has the <strong>CLK</strong> and <strong>RESET</strong> input signals, which are not shown in the figure above. The <strong>CLK</strong> signal must be connected to a clock source. The <strong>RESET</strong> signal is active high and resets the core synchronously.</p>
               
             </div>
           </div>
