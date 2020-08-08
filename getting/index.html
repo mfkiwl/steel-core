@@ -127,7 +127,7 @@
               
                 <h1 id="getting-started">Getting Started</h1>
 <h2 id="what-you-need-to-know-first">What you need to know first</h2>
-<p>Steel must be connected to a word-addressed memory with 1 clock cycle read/write latency, which means that the memory takes 1 clock cycle to complete both read and write operations. The signals used to fetch instructions and to read/write data were designed to facilitate the integration with FPGA Block RAMs and memory arrays.</p>
+<p>Steel must be connected to a word-addressed memory with 1 clock cycle read/write latency, which means that the memory should take 1 clock cycle to complete both read and write operations. The signals used to fetch instructions and to read/write data were designed to facilitate the integration with FPGA Block RAMs and memory arrays.</p>
 <h2 id="using-steel-in-your-project">Using Steel in your project</h2>
 <p>To use Steel in your project you must import all files from the <strong>rtl</strong> directory to it. Then instantiate Steel using the following template:</p>
 <pre><code class="verilog">steel_top #(
