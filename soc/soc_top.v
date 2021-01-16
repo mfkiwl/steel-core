@@ -55,7 +55,7 @@ SOFTWARE.
 
 module soc_top #(
 
-    parameter BOOT_ADDRESS = 32'h00000000
+    parameter BOOT_ADDRESS = 32'h00000014
     
     )(
 

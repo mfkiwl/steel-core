@@ -1,73 +1,91 @@
 <p align="center">
   <img width="100" src="https://user-images.githubusercontent.com/22325319/85179004-38513880-b256-11ea-9a1a-4d204183bb13.png">
 </p>
-Steel is a RISC-V microprocessor softcore designed to be simple and easy to use. It is intended for use as a processing unit in embedded systems projects.
-<p align="center"></p>
 
-**Key features:**
-* RV32IZicsr implementation
-* Small and easy to use
-* 3 pipeline stages
-* Single-issue
-* M-mode support
-* Targeted for use in FPGAs
+Steel is a microprocessor core that implements the RV32I and Zicsr instruction sets of the RISC-V specifications. It is designed to be easy to use and targeted for embedded systems projects.
+
+## Key features
+
+* Simple and easy to use
+* Implements the RV32I base instruction set + Zicsr extension + M-mode privileged architecture
+* 3 pipeline stages, single-issue
+* Hardware described in Verilog
 * Full documentation
-* Passed all RV32IZicsr tests from RISC-V test and compliance suites
-* 0.46 CoreMarks / MHz
+* Passed all RISC-V Compliance Suite tests for the RV32I and Zicsr instruction sets
+* 1.36 CoreMarks/MHz
 
-## Licence
+## Getting started
 
-Steel is distributed under the MIT License. See the `LICENCE.md` file.
+To start using Steel, follow these steps:
 
-## Documentation
+1. Import all files inside the **rtl** directory into your project
+2. Instantiate the core into a Verilog/SystemVerilog module (an instantiation template is provided below)
+3. Connect Steel to a clock source, a reset signal and memory. There is an interface to fetch instructions and another to read/write data, so we recommend a dual-port memory
 
-Steel documentation ([https://rafaelcalcada.github.io/steel-core/](https://rafaelcalcada.github.io/steel-core/)) provides information on:
-* Steel configuration
-* Integration with other devices
-* Implemented extensions and CSRs
-* Supported exceptions and interrupts
-* Trap handling
-* Implementation details
-* Timing diagrams for instruction fetch, data fetch, data writing and interrupt request processes
-* Input and output signals
+There are also interfaces to request for interrupts and to update the time register. The signals of these interfaces must be hardwired to zero if unused. [Read the docs](https://rafaelcalcada.github.io/steel-core/) for more information about this signals.
 
-## Using Steel in your project
-
-To use Steel in your project you must import all files from `rtl` directory to it. Then instantiate Steel using the following template:
-```
+```verilog
 steel_top #(
 
-    .BOOT_ADDRESS()     // You must provide a 32-bit value. If omitted the core will use
-                        // its default value, 32'h00000000.
-    ) core (
+    // You must provide a 32-bit value. If omitted the boot address is set to 0x00000000
+    // ---------------------------------------------------------------------------------
+
+    .BOOT_ADDRESS() 
+                  
+    ) core (    
     
-    // Optional inputs must be hardwired to zero if not used.
+    // Clock source and reset
+    // ---------------------------------------------------------------------------------
     
-    .CLK(),             // Clock source (required, input, 1-bit)
-    .RESET(),           // Reset (required, input, synchronous, active high, 1-bit)
-    .REAL_TIME(),       // Value read from a real time counter (optional, input, 64-bit)
-    .I_ADDR(),          // Instruction address (output, 32-bit)
-    .INSTR(),           // Instruction data (required, input, 32-bit)
-    .D_ADDR(),          // Data address (output, 32-bit)
-    .DATA_OUT(),        // Data to be written (output, 32-bit)
-    .WR_REQ(),          // Write enable (output, 1-bit)
-    .WR_MASK(),         // Write mask (output, 4-bit). Also known as "write strobe"
-    .DATA_IN(),         // Data read from memory (required, input, 32-bit)
-    .E_IRQ(),           // External interrupt request (optional, active-high, input, 1-bit)
-    .T_IRQ(),           // Timer interrupt request (optional, active-high, input, 1-bit)
-    .S_IRQ()            // Software interrupt request (optional, active-high, input, 1-bit)
+    .CLK(),         // System clock (input, required, 1-bit)
+    .RESET(),       // System reset (input, required, 1-bit, synchronous, active high)
+
+    // Instruction fetch interface
+    // ---------------------------------------------------------------------------------
+    .I_ADDR(),      // Instruction address (output, 32-bit)
+    .INSTR(),       // Instruction data (input, required, 32-bit)
+    
+    // Data read/write interface
+    // ---------------------------------------------------------------------------------
+
+    .D_ADDR(),      // Data address (output, 32-bit)    
+    .DATA_IN(),     // Data read from memory (input, required, 32-bit)
+    .DATA_OUT(),    // Data to write into memory (output, 32-bit)
+    .WR_REQ(),      // Write enable (output, 1-bit)
+    .WR_MASK(),     // Write byte mask (output, 4-bit)
+    
+    // Interrupt request interface (hardwire to zero if unused)
+    // ---------------------------------------------------------------------------------
+    
+    .E_IRQ(),       // External interrupt request (optional, active high, 1-bit)
+    .T_IRQ(),       // Timer interrupt request (optional, active high, 1-bit)
+    .S_IRQ()        // Software interrupt request (optional, active high, 1-bit)
+
+    // Time register update interface (hardwire to zero if unused)
+    // ---------------------------------------------------------------------------------
+
+    .REAL_TIME(),   // Value read from a real-time counter (optional, 64-bit)
     
 );
 ```
-Steel must be connected to a word-addressed memory with 1 clock cycle read/write latency, which means that the memory should take 1 clock cycle to complete both read and write operations. The signals used to fetch instructions and to read/write data were designed to facilitate the integration with FPGA Block RAMs and memory arrays. Read the documentation to learn how integrate the core to these devices.
 
-## Running the project in Vivado
+## Documentation
 
-The `vivado` directory has a project created in Vivado for an Artix-7 FPGA. To run it, simply open it in Vivado. To run it on another device, change the project settings.
+Steel documentation is available at [https://rafaelcalcada.github.io/steel-core/](https://rafaelcalcada.github.io/steel-core/) and provides information on:
+* How to compile software for Steel
+* I/O signals and communication with other devices
+* Configuration
+* Exceptions, interrupts and trap handling
+* Implementation details
+* Timing diagrams
+
+## License
+
+Steel is distributed under the MIT License. Read the `LICENSE.md` file before using Steel.
 
 ## About the author
 
-The author is a computer engineering student at UFRGS (graduates at the end of 2020) and developed Steel Core for his undergraduate thesis.
+The author is a computer engineering student at UFRGS (graduates at the end of 2020).
 
 Contact: rafaelcalcada@gmail.com / rafaelcalcada@hotmail.com
 

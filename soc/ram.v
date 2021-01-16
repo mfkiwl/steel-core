@@ -47,7 +47,7 @@ module ram(
      
     );
     
-    reg [31:0] ram [0:2047];
+    reg [31:0] ram [0:8191];
     reg [10:0] prev_addra;
     reg [10:0] prev_addrb;
     
@@ -57,7 +57,7 @@ module ram(
     initial
     begin
         for(i = 0; i < 2048;i = i+1) ram[i] = 32'b0;
-        $readmemh("hello.mem", ram);
+        $readmemh("hello.hex", ram);
     end
     
     always @(posedge CLK) prev_addra <= ADDRA;
